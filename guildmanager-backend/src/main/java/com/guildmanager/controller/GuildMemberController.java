@@ -20,7 +20,10 @@ public class GuildMemberController {
 
     @GetMapping
     public List<GuildMember> getAllMembers() {
-        return guildMemberService.getAllMembers();
+        System.out.println("Fetching all guild members...");  // Console log added
+        List<GuildMember> members = guildMemberService.getAllMembers();
+        System.out.println("Retrieved " + members.size() + " guild members.");  // Log the number of members retrieved
+        return members;
     }
 
     @PostMapping

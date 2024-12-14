@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/guildmanager.iml" filepath="$PROJECT_DIR$/guildmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/guildmanager-frontend.iml" filepath="$PROJECT_DIR$/guildmanager-frontend.iml" />
     </modules>
   </component>
 </project>
