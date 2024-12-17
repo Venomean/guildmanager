@@ -1,6 +1,5 @@
-package com.guildmanager.config;  // use the appropriate package for your project
+package com.guildmanager.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

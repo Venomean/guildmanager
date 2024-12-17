@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api/members';
+const API_URL = 'http://localhost:8080/api/members';
 
-// Define the GuildMember type
 export interface GuildMember {
     id: string;
     name: string;
@@ -11,10 +10,9 @@ export interface GuildMember {
     role: string;
 }
 
-// Fetch all guild members
 export const fetchGuildMembers = async (): Promise<GuildMember[]> => {
     try {
-        const response = await axios.get<GuildMember[]>(API_BASE_URL);
+        const response = await axios.get<GuildMember[]>(API_URL);
         return response.data;
     } catch (error) {
         console.error('Error fetching guild members:', error);
@@ -22,21 +20,18 @@ export const fetchGuildMembers = async (): Promise<GuildMember[]> => {
     }
 };
 
-// Add a new guild member
-export const addGuildMember = async (member: Omit<GuildMember, 'id'>): Promise<GuildMember> => {
+export const deleteGuildMember = async (id: string): Promise<void> => {
     try {
-        const response = await axios.post<GuildMember>(API_BASE_URL, member);
-        return response.data;
+        await axios.delete(`${API_URL}/${id}`);
     } catch (error) {
-        console.error('Error adding guild member:', error);
+        console.error('Error deleting guild member:', error);
         throw error;
     }
 };
 
-// Update an existing guild member
 export const updateGuildMember = async (id: string, updatedMember: Omit<GuildMember, 'id'>): Promise<GuildMember> => {
     try {
-        const response = await axios.put<GuildMember>(`${API_BASE_URL}/${id}`, updatedMember);
+        const response = await axios.put<GuildMember>(`${API_URL}/${id}`, updatedMember);
         return response.data;
     } catch (error) {
         console.error('Error updating guild member:', error);
@@ -44,12 +39,12 @@ export const updateGuildMember = async (id: string, updatedMember: Omit<GuildMem
     }
 };
 
-// Delete a guild member
-export const deleteGuildMember = async (id: string): Promise<void> => {
+export const createGuildMember = async (newMember: Omit<GuildMember, 'id'>): Promise<GuildMember> => {
     try {
-        await axios.delete(`${API_BASE_URL}/${id}`);
+        const response = await axios.post<GuildMember>(API_URL, newMember);
+        return response.data;
     } catch (error) {
-        console.error('Error deleting guild member:', error);
+        console.error('Error creating guild member:', error);
         throw error;
     }
 };
