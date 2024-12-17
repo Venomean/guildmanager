@@ -3,6 +3,8 @@ package com.guildmanager.controller;
 import com.guildmanager.model.GuildMember;
 import com.guildmanager.service.GuildMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +29,9 @@ public class GuildMemberController {
     }
 
     @PostMapping
-    public GuildMember createMember(@RequestBody GuildMember member) {
-        return guildMemberService.createMember(member);
+    public ResponseEntity<GuildMember> createMember(@RequestBody GuildMember member) {
+        GuildMember createdMember = guildMemberService.createMember(member);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdMember);
     }
 
     @PutMapping("/{id}")
@@ -37,7 +40,8 @@ public class GuildMemberController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMember(@PathVariable String id) {
+    public ResponseEntity<Void> deleteMember(@PathVariable String id) {
         guildMemberService.deleteMember(id);
+        return ResponseEntity.noContent().build();
     }
 }
